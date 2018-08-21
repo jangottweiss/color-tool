@@ -2,8 +2,7 @@
   <div id="container" v-bind:style="{ backgroundColor: bgColor}">   
     <div id="app">
       <ColorInput @newColor="newColor" v-bind:startColor="bgColor" />
-    </div>
-    
+    </div>    
   </div>
 </template>
 

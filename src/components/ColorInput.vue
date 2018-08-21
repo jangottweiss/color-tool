@@ -1,11 +1,10 @@
 <template>
   <div class="component">  
     <el-row :gutter="20" type="flex" justify="space-around">
-      <el-col :span="18"><div>
+      <el-col :span="20"><div>
          <el-input    
-        size="large"
-        placeholder="Please Input"
-        v-model="colorInput">
+            size="large"            
+            v-model="colorInput">
         </el-input>  
         <el-color-picker v-model="colorInputPicker" @change="colorPickerChange"></el-color-picker>    
       </div>
