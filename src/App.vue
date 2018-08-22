@@ -1,21 +1,28 @@
 <template>
-  <div id="container" v-bind:style="{ backgroundColor: bgColor}">   
-    <div id="app">
-      <ColorInput @newColor="newColor" v-bind:startColor="bgColor" />
-    </div>    
-  </div>
+  <div class="content" v-bind:style="{ backgroundColor: bgColor}">
+    <header>
+    </header>
+    <section class="center">
+      <ColorInput @newColor="newColor" v-bind:startColor="bgColor" />  
+    </section>
+    <footer class="footer" v-bind:style="{ backgroundColor: color.hex()}">
+      <ColorShades v-bind:color="color" />
+    </footer>  
+  </div>      
 </template>
 
 <script>
 import chroma from "chroma-js";
 import ColorInput from "./components/ColorInput.vue";
+import ColorShades from "./components/ColorShades.vue";
 
 const startColor = chroma.random();
 
 export default {
   name: "app",
   components: {
-    ColorInput
+    ColorInput,
+    ColorShades
   },
   data() {
     return {
@@ -26,32 +33,35 @@ export default {
   methods: {
     newColor(c) {
       this.bgColor = c.hex();
+      this.color = c;
     }
   }
 };
 </script>
 
 <style>
+html,
 body {
-  margin: 0px;
-  padding: 0px;
+  height: 100%;
+  margin: 0;
+}
+html > body .content {
+  height: auto;
+}
+.content {
+  height:100%;
+  min-height:100%;/*for mozilla*/
 }
 
-#container {
-  width: 100;
-  height: 100%;
+.footer {
+  background-color: aliceblue;
   position: absolute;
-  top: 0;
   bottom: 0px;
-  left: 0px;
-  right: 0px;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 250px;
+  width: 100%
 }
-#app {
+
+.center {
   width: 50%;
   height: 250px;
 

@@ -38,9 +38,9 @@ export default {
   name: "ColorInput",
   props: ["startColor"],
   created: function() {
-		this.colorObject = chroma(this.startColor);
-		this.inputHEX = this.colorObject.hex();
-	},
+    this.colorObject = chroma(this.startColor);
+    this.inputHEX = this.colorObject.hex();
+  },
   data() {
     return {
       colorObject: "",
@@ -52,8 +52,8 @@ export default {
   methods: {
     newInput(input) {
       try {
-				this.colorObject = chroma(input);
-				this.newColor(this.colorObject);
+        this.colorObject = chroma(input);
+        this.newColor(this.colorObject);
       } catch (error) {
         console.log(error);
         return;
@@ -62,26 +62,28 @@ export default {
     newColor(c) {
       this.$emit("newColor", c);
     },
-		colorPickerChange() {
-			this.newInput(this.inputPicker);
-			this.inputHEX = this.colorObject.hex();
-		},
-		test() {
-			console.log("TEST")
-		}
-		
+    colorPickerChange() {
+      this.newInput(this.inputPicker);
+      this.updateHEX(this.colorObject);
+    },
+    updateRGB(c) {
+      this.inputRGB = c.rgb().join(",");
+    },
+    updateHEX(c) {
+      this.inputHEX = c.hex().substring(1);
+    }
   },
   watch: {
     inputHEX: function(newColorInput) {
       if (newColorInput.length < 6) return;
-			this.newInput(newColorInput);
-			this.inputRGB = this.colorObject.rgb();
+      this.newInput(newColorInput);
+      this.updateRGB(this.colorObject);
       this.inputPicker = this.colorObject.hex();
     },
     inputRGB: function(newColorInput) {
       if (newColorInput.length < 3) return;
       this.newInput(newColorInput.split(","));
-      this.inputHEX = this.colorObject.hex();
+      this.updateHEX(this.colorObject);
       this.inputPicker = this.colorObject.hex();
     }
   }
