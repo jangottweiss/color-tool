@@ -8,27 +8,27 @@
 
 <script>
 import chroma from "chroma-js";
-import ColorInput from './components/ColorInput.vue'
+import ColorInput from "./components/ColorInput.vue";
 
-const startColor = "#D4F880";
+const startColor = chroma.random();
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     ColorInput
   },
   data() {
     return {
       bgColor: startColor,
-      color: chroma(startColor)
-    }
+      color: startColor
+    };
   },
   methods: {
     newColor(c) {
       this.bgColor = c.hex();
     }
   }
-}
+};
 </script>
 
 <style>
@@ -41,14 +41,30 @@ body {
   width: 100;
   height: 100%;
   position: absolute;
-  top: 0; bottom: 0px; left: 0px; right: 0px;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  top: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 #app {
-  margin: 50px;
+  width: 50%;
+  height: 250px;
+
+  position: absolute; /*it can be fixed too*/
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+  /*this to solve "the content will not be cut when the window is smaller than the content": */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
 }
 </style>
