@@ -1,4 +1,8 @@
-# simple-color-tool
+# Simple Color Tool
+
+
+**Small Vue.js Playground**
+
 
 ## Project setup
 ```
